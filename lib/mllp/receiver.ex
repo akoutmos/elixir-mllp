@@ -109,7 +109,7 @@ defmodule MLLP.Receiver do
 
     framing_context3 =
       if reply_buffer != "" do
-        state.transport.send(socket, reply_buffer)
+        state.transport.send(socket, <<0x0B>> <> reply_buffer <> <<0x1C, 0x0D>>)
         %{framing_context2 | reply_buffer: ""}
       else
         framing_context2
